@@ -50,6 +50,74 @@
 		</div>
 
 		<h4 class="ui top attached header">
+			{{ctx.Locale.Tr "admin.config.ssl_config"}}
+		</h4>
+		<div class="ui attached table segment">
+			<dl class="admin-dl-horizontal">
+				<dt>{{ctx.Locale.Tr "admin.config.ssl_enabled"}}</dt>
+				<dd>{{svg (Iif .SSL.Enabled "octicon-check" "octicon-x")}}</dd>
+				{{if .SSL.Enabled}}
+					{{if eq .SSL.ConfigMethod "cert_key"}}
+						<dt>{{ctx.Locale.Tr "admin.config.ssl_cert_file"}}</dt>
+						<dd>
+							{{.SSL.CertFile}}
+							{{if .SSL.CertFileExists}}
+								{{if .SSL.CertFileReadable}}
+									{{svg "octicon-check" 16 "text green"}} {{ctx.Locale.Tr "admin.config.ssl_file_readable"}}
+								{{else}}
+									{{svg "octicon-x" 16 "text red"}} {{ctx.Locale.Tr "admin.config.ssl_file_unreadable"}}
+								{{end}}
+							{{else}}
+								{{svg "octicon-x" 16 "text red"}} {{ctx.Locale.Tr "admin.config.ssl_file_not_found"}}
+							{{end}}
+						</dd>
+						<dt>{{ctx.Locale.Tr "admin.config.ssl_key_file"}}</dt>
+						<dd>
+							{{.SSL.KeyFile}}
+							{{if .SSL.KeyFileExists}}
+								{{if .SSL.KeyFileReadable}}
+									{{svg "octicon-check" 16 "text green"}} {{ctx.Locale.Tr "admin.config.ssl_file_readable"}}
+								{{else}}
+									{{svg "octicon-x" 16 "text red"}} {{ctx.Locale.Tr "admin.config.ssl_file_unreadable"}}
+								{{end}}
+							{{else}}
+								{{svg "octicon-x" 16 "text red"}} {{ctx.Locale.Tr "admin.config.ssl_file_not_found"}}
+							{{end}}
+						</dd>
+					{{end}}
+
+					{{if eq .SSL.ConfigMethod "acme"}}
+						<dt>{{ctx.Locale.Tr "admin.config.ssl_acme_email"}}</dt>
+						<dd>{{.SSL.AcmeEmail}}</dd>
+						<dt>{{ctx.Locale.Tr "admin.config.ssl_acme_url"}}</dt>
+						<dd>{{if .SSL.AcmeURL}}{{.SSL.AcmeURL}}{{else}}{{svg "octicon-x" 16 "text red"}}{{end}}</dd>
+						<dt>{{ctx.Locale.Tr "admin.config.ssl_acme_directory"}}</dt>
+						<dd>{{.SSL.AcmeDirectory}}</dd>
+						{{if .SSL.AcmeCARoot}}
+							<dt>{{ctx.Locale.Tr "admin.config.ssl_acme_ca_root"}}</dt>
+							<dd>{{.SSL.AcmeCARoot}}</dd>
+						{{end}}
+					{{end}}
+
+					{{if eq .SSL.ConfigMethod "misconfigured"}}
+						<dt>{{svg "octicon-alert" 16}} {{ctx.Locale.Tr "admin.config.ssl_misconfigured"}}</dt>
+						<dd>{{ctx.Locale.Tr "admin.config.ssl_misconfigured_desc"}}</dd>
+					{{end}}
+
+					<div class="divider"></div>
+					<dt>{{ctx.Locale.Tr "admin.config.ssl_min_version"}}</dt>
+					<dd>{{if .SSL.MinimumVersion}}{{.SSL.MinimumVersion}}{{else}}{{svg "octicon-x"}}{{end}}</dd>
+					<dt>{{ctx.Locale.Tr "admin.config.ssl_max_version"}}</dt>
+					<dd>{{if .SSL.MaximumVersion}}{{.SSL.MaximumVersion}}{{else}}{{svg "octicon-x"}}{{end}}</dd>
+					<dt>{{ctx.Locale.Tr "admin.config.ssl_curve_preferences"}}</dt>
+					<dd>{{if .SSL.CurvePreferences}}{{StringUtils.Join .SSL.CurvePreferences ", "}}{{else}}{{svg "octicon-x"}}{{end}}</dd>
+					<dt>{{ctx.Locale.Tr "admin.config.ssl_cipher_suites"}}</dt>
+					<dd>{{if .SSL.CipherSuites}}{{StringUtils.Join .SSL.CipherSuites ", "}}{{else}}{{svg "octicon-x"}}{{end}}</dd>
+				{{end}}
+			</dl>
+		</div>
+
+		<h4 class="ui top attached header">
 			{{ctx.Locale.Tr "admin.config.ssh_config"}}
 		</h4>
 		<div class="ui attached table segment">

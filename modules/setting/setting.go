@@ -1,5 +1,6 @@
 // Copyright 2014 The Gogs Authors. All rights reserved.
 // Copyright 2017 The Gitea Authors. All rights reserved.
+// Copyright 2025 The Gitea Authors. All rights reserved.
 // SPDX-License-Identifier: MIT
 
 package setting
@@ -112,6 +113,7 @@ func loadCommonSettingsFrom(cfg ConfigProvider) error {
 	loadRunModeFrom(cfg)
 	loadLogGlobalFrom(cfg)
 	loadServerFrom(cfg)
+	loadSSLFrom(cfg)
 	loadSSHFrom(cfg)
 
 	mustCurrentRunUserMatch(cfg) // it depends on the SSH config, only non-builtin SSH server requires this check

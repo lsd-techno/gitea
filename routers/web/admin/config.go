@@ -1,5 +1,6 @@
 // Copyright 2014 The Gogs Authors. All rights reserved.
 // Copyright 2019 The Gitea Authors. All rights reserved.
+// Copyright 2025 The Gitea Authors. All rights reserved.
 // SPDX-License-Identifier: MIT
 
 package admin
@@ -139,6 +140,7 @@ func Config(ctx *context.Context) {
 	ctx.Data["ReverseProxyAuthUser"] = setting.ReverseProxyAuthUser
 	ctx.Data["ReverseProxyAuthEmail"] = setting.ReverseProxyAuthEmail
 
+	ctx.Data["SSL"] = setting.SSL
 	ctx.Data["SSH"] = setting.SSH
 	ctx.Data["LFS"] = setting.LFS
 
