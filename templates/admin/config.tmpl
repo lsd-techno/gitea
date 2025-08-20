@@ -63,12 +63,12 @@
 							{{.SSL.CertFile}}
 							{{if .SSL.CertFileExists}}
 								{{if .SSL.CertFileReadable}}
-									{{svg "octicon-check" 16 "text green"}} {{ctx.Locale.Tr "admin.config.ssl_file_readable"}}
+									{{svg "octicon-info" 16 "text green"}} {{ctx.Locale.Tr "admin.config.ssl_file_readable"}}
 								{{else}}
-									{{svg "octicon-x" 16 "text red"}} {{ctx.Locale.Tr "admin.config.ssl_file_unreadable"}}
+									{{svg "octicon-info" 16 "text red"}} {{ctx.Locale.Tr "admin.config.ssl_file_unreadable"}}
 								{{end}}
 							{{else}}
-								{{svg "octicon-x" 16 "text red"}} {{ctx.Locale.Tr "admin.config.ssl_file_not_found"}}
+								{{svg "octicon-info" 16 "text red"}} {{ctx.Locale.Tr "admin.config.ssl_file_not_found"}}
 							{{end}}
 						</dd>
 						<dt>{{ctx.Locale.Tr "admin.config.ssl_key_file"}}</dt>
@@ -76,12 +76,12 @@
 							{{.SSL.KeyFile}}
 							{{if .SSL.KeyFileExists}}
 								{{if .SSL.KeyFileReadable}}
-									{{svg "octicon-check" 16 "text green"}} {{ctx.Locale.Tr "admin.config.ssl_file_readable"}}
+									{{svg "octicon-info" 16 "text green"}} {{ctx.Locale.Tr "admin.config.ssl_file_readable"}}
 								{{else}}
-									{{svg "octicon-x" 16 "text red"}} {{ctx.Locale.Tr "admin.config.ssl_file_unreadable"}}
+									{{svg "octicon-info" 16 "text red"}} {{ctx.Locale.Tr "admin.config.ssl_file_unreadable"}}
 								{{end}}
 							{{else}}
-								{{svg "octicon-x" 16 "text red"}} {{ctx.Locale.Tr "admin.config.ssl_file_not_found"}}
+								{{svg "octicon-info" 16 "text red"}} {{ctx.Locale.Tr "admin.config.ssl_file_not_found"}}
 							{{end}}
 						</dd>
 					{{end}}
@@ -104,15 +104,17 @@
 						<dd>{{ctx.Locale.Tr "admin.config.ssl_misconfigured_desc"}}</dd>
 					{{end}}
 
-					<div class="divider"></div>
-					<dt>{{ctx.Locale.Tr "admin.config.ssl_min_version"}}</dt>
-					<dd>{{if .SSL.MinimumVersion}}{{.SSL.MinimumVersion}}{{else}}{{svg "octicon-x"}}{{end}}</dd>
-					<dt>{{ctx.Locale.Tr "admin.config.ssl_max_version"}}</dt>
-					<dd>{{if .SSL.MaximumVersion}}{{.SSL.MaximumVersion}}{{else}}{{svg "octicon-x"}}{{end}}</dd>
-					<dt>{{ctx.Locale.Tr "admin.config.ssl_curve_preferences"}}</dt>
-					<dd>{{if .SSL.CurvePreferences}}{{StringUtils.Join .SSL.CurvePreferences ", "}}{{else}}{{svg "octicon-x"}}{{end}}</dd>
-					<dt>{{ctx.Locale.Tr "admin.config.ssl_cipher_suites"}}</dt>
-					<dd>{{if .SSL.CipherSuites}}{{StringUtils.Join .SSL.CipherSuites ", "}}{{else}}{{svg "octicon-x"}}{{end}}</dd>
+					{{if or .SSL.MinimumVersion .SSL.MaximumVersion .SSL.CurvePreferences .SSL.CipherSuites}}
+						<div class="divider"></div>
+						<dt>{{ctx.Locale.Tr "admin.config.ssl_min_version"}}</dt>
+						<dd>{{if .SSL.MinimumVersion}}{{.SSL.MinimumVersion}}{{else}}{{svg "octicon-unlock"}}{{end}}</dd>
+						<dt>{{ctx.Locale.Tr "admin.config.ssl_max_version"}}</dt>
+						<dd>{{if .SSL.MaximumVersion}}{{.SSL.MaximumVersion}}{{else}}{{svg "octicon-unlock"}}{{end}}</dd>
+						<dt>{{ctx.Locale.Tr "admin.config.ssl_curve_preferences"}}</dt>
+						<dd>{{if .SSL.CurvePreferences}}{{StringUtils.Join .SSL.CurvePreferences ", "}}{{else}}{{svg "octicon-unlock"}}{{end}}</dd>
+						<dt>{{ctx.Locale.Tr "admin.config.ssl_cipher_suites"}}</dt>
+						<dd>{{if .SSL.CipherSuites}}{{StringUtils.Join .SSL.CipherSuites ", "}}{{else}}{{svg "octicon-unlock"}}{{end}}</dd>
+					{{end}}
 				{{end}}
 			</dl>
 		</div>
