@@ -18,6 +18,7 @@
             go = go_1_25;
             nodejs = nodejs_24;
             python3 = python312;
+            pnpm = pnpm_10;
 
             # Platform-specific dependencies
             linuxOnlyInputs = lib.optionals pkgs.stdenv.isLinux [
@@ -39,9 +40,14 @@
                 gnused
                 gnutar
                 gzip
+                zip
 
                 # frontend
                 nodejs
+                pnpm
+                cairo
+                pixman
+                pkg-config
 
                 # linting
                 python3
