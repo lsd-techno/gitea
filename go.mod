@@ -1,6 +1,8 @@
 module code.gitea.io/gitea
 
-go 1.25.3
+go 1.25.0
+
+toolchain go1.25.4
 
 // rfc5280 said: "The serial number is an integer assigned by the CA to each certificate."
 // But some CAs use negative serial number, just relax the check. related:
@@ -9,7 +11,6 @@ godebug x509negativeserial=1
 
 require (
 	code.gitea.io/actions-proto-go v0.4.1
-	code.gitea.io/gitea-vet v0.2.3
 	code.gitea.io/sdk/gitea v0.22.0
 	codeberg.org/gusted/mcaptcha v0.0.0-20220723083913-4f3072e1d570
 	connectrpc.com/connect v1.18.1
@@ -35,7 +36,7 @@ require (
 	github.com/bohde/codel v0.2.0
 	github.com/buildkite/terminal-to-html/v3 v3.16.8
 	github.com/caddyserver/certmagic v0.24.0
-	github.com/charmbracelet/git-lfs-transfer v0.2.0
+	github.com/charmbracelet/git-lfs-transfer v0.1.1-0.20251013092601-6327009efd21
 	github.com/chi-middleware/proxy v1.1.1
 	github.com/dimiro1/reply v0.0.0-20200315094148-d0136a4c9e21
 	github.com/djherbis/buffer v1.2.0
@@ -56,7 +57,7 @@ require (
 	github.com/go-co-op/gocron v1.37.0
 	github.com/go-enry/go-enry/v2 v2.9.2
 	github.com/go-git/go-billy/v5 v5.6.2
-	github.com/go-git/go-git/v5 v5.16.2
+	github.com/go-git/go-git/v5 v5.16.3
 	github.com/go-ldap/ldap/v3 v3.4.11
 	github.com/go-redsync/redsync/v4 v4.13.0
 	github.com/go-sql-driver/mysql v1.9.3
@@ -109,7 +110,7 @@ require (
 	github.com/ulikunitz/xz v0.5.15
 	github.com/urfave/cli-docs/v3 v3.0.0-alpha6
 	github.com/urfave/cli/v3 v3.4.1
-	github.com/wneessen/go-mail v0.7.1
+	github.com/wneessen/go-mail v0.7.2
 	github.com/xeipuuv/gojsonschema v1.2.0
 	github.com/yohcop/openid-go v1.0.1
 	github.com/yuin/goldmark v1.7.13
@@ -121,7 +122,7 @@ require (
 	golang.org/x/net v0.44.0
 	golang.org/x/oauth2 v0.30.0
 	golang.org/x/sync v0.17.0
-	golang.org/x/sys v0.36.0
+	golang.org/x/sys v0.37.0
 	golang.org/x/text v0.30.0
 	google.golang.org/grpc v1.75.0
 	google.golang.org/protobuf v1.36.8
@@ -135,6 +136,7 @@ require (
 
 require (
 	cloud.google.com/go/compute/metadata v0.8.0 // indirect
+	code.gitea.io/gitea-vet v0.2.3 // indirect
 	dario.cat/mergo v1.0.2 // indirect
 	filippo.io/edwards25519 v1.1.0 // indirect
 	git.sr.ht/~mariusor/go-xsd-duration v0.0.0-20220703122237-02e73435a078 // indirect
@@ -298,9 +300,6 @@ replace github.com/hashicorp/go-version => github.com/6543/go-version v1.3.1
 
 replace github.com/nektos/act => gitea.com/gitea/act v0.261.7-0.20251003180512-ac6e4b751763
 
-// TODO: the only difference is in `PutObject`: the fork doesn't use `NewVerifyingReader(r, sha256.New(), oid, expectedSize)`, need to figure out why
-replace github.com/charmbracelet/git-lfs-transfer => gitea.com/gitea/git-lfs-transfer v0.2.0
-
 replace git.sr.ht/~mariusor/go-xsd-duration => gitea.com/gitea/go-xsd-duration v0.0.0-20220703122237-02e73435a078
 
 exclude github.com/gofrs/uuid v3.2.0+incompatible
@@ -310,3 +309,5 @@ exclude github.com/gofrs/uuid v4.0.0+incompatible
 exclude github.com/goccy/go-json v0.4.11
 
 exclude github.com/satori/go.uuid v1.2.0
+
+tool code.gitea.io/gitea-vet

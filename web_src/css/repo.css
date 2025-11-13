@@ -387,6 +387,7 @@ td .commit-summary {
 
 .repository.view.issue .pull-desc code {
   color: var(--color-primary);
+  background: transparent;
 }
 
 .repository.view.issue .pull-desc a[data-clipboard-text] {
@@ -532,6 +533,10 @@ td .commit-summary {
   color: var(--color-text-light);
 }
 
+.repository.view.issue .comment-list .timeline-item .comment-text-line .ui.label {
+  line-height: 1.5; /* label has background, so it can't use parent's line-height */
+}
+
 .repository.view.issue .comment-list .timeline-item .comment-text-line a {
   color: inherit;
 }
@@ -654,8 +659,8 @@ td .commit-summary {
 
 .repository.view.issue .comment-list .code-comment .comment-header {
   background: transparent;
-  border-bottom: 0 !important;
-  padding: 0 !important;
+  border-bottom: 0;
+  padding: 0;
 }
 
 .repository.view.issue .comment-list .code-comment .comment-content {
@@ -1311,6 +1316,10 @@ td .commit-summary {
   gap: 0.25em;
 }
 
+.comment-header.avatar-content-left-arrow::after {
+  border-right-color: var(--color-box-header);
+}
+
 .comment-header.arrow-top::before,
 .comment-header.arrow-top::after {
   transform: rotate(90deg);
@@ -1582,6 +1591,7 @@ tbody.commit-list {
   display: flex;
   align-items: center;
   width: max-content;
+  gap: 0.25em;
 }
 
 .file-info-entry + .file-info-entry {
